@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wroom wroom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //poeng
+        let coolness = 5;
+        let coolbar = ['■', '■', '■', '■', '■']
+        let coolmultiplier = false;
+        //ting
+        let itemIsCool = false;
+        let CoolItems = [' Dice', ' Spoiler', ' Wunderbaum', ' Preformance tires']
+        let UnCoolItems = [' Baby Seat', ' Pink paintjob', ' Car lashes', ' Truck nuts']
+        //kompiser
+        let kompis1 = {
+            name: "Marius",
+            greeting1: "Knallgode vibber! Cowa bunga",
+            greeting2: "Ikke så råe vibber her nei :(",
+            image: "car1.png",
+        }
+        let kompis2 = {
+            name: "Eskil",
+            greeting1: "God locus of control her!",
+            greeting2: "Hvor ble det av locusen :(",
+            image: "car2.png",
+        }
+
+        let imgSrc = "cat.jpg";
+
+
+
+        let app = document.getElementById('app');
+        updateView()
+
+        function updateView() {
+            app.innerHTML = /*html*/ `
+            <div class="buddyDiv">
+            <h1>Ska'ru værra med å kjøre i kjærra? Eller får du ikke lov av mærra?</h1>
+            </div>
+
+            <div class = "coolbarContainer">
+
+            <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+            
+            </div>
+
+            <div class="events">
+            <div id = "EventDiv"></div>
+            <button onclick = "kjør()">Kjør</button>
+            
+            <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+            </div>
+            
+            <img src="${imgSrc}" class="catImg"><br/>
+            <button class="catsBtn" onclick = "catsAllTheCats()">KATTER!!!</button>
+            
+            `;
+            if (coolness > 19) {
+                app.innerHTML = /*html*/`
+
+             <div class="winOrLoseContainer">
+             <div>
+                Gratulerer, du vant! Sjekk den kule bilen din!<br><br> Du burde endre navnet ditt til Awesome 
+                og <br><br>vennene dine burde bøye seg i støvet!</div>
+             </div>
+
+            <div class="winOrLoseImgContainer">
+            <img src="tow-mater-win.png" class="winOrLoseImg"></div>
+            `;
+
+            }
+            else if (coolness <= 0) {
+                app.innerHTML = /*html*/`
+
+                <div class="winOrLoseContainer">
+                <div>
+                    Hva gjorde du?! Ser du hvordan bilen din ser ut??? <br> Trodde ikke at det gikk an å tape dette enkle spillet..<br> HAHAHA, TAPER!</div>
+                </div>
+
+                <div class="winOrLoseImgContainer">
+                <img src="tow-mater-loose.jpg" class="winOrLoseImg" ></div>
+                `;
+            }
+
+        }
+        //Multiplier
+        function ActivateMulti() {
+            multiplier();
+            setTimeout(multiplier, 25000);
+        }
+
+
+        function multiplier() {
+            coolmultiplier = !coolmultiplier;
+            updateView()
+        }
+
+
+
+        function kjør() {
+            let event = Math.floor(Math.random() * 9);
+            console.log(event)
+
+            if (event <= 5) {
+                ItemEvent()
+
+            } else if (event == 6) {
+                MeetFriend()
+
+            } else if (event == 7) {
+                MeetFriend()
+
+            } else if (event == 8 && coolmultiplier == false) {
+                granny()
+            }
+
+        }
+
+
+        //Poeng
+        function getCool() {
+            if (coolmultiplier == true) {
+                coolbar.push('■');
+                coolbar.push('■');
+                coolness++;
+                coolness++;
+                updateView()
+            }
+            else if (coolmultiplier == false) {
+                coolbar.push('■')
+                coolness++;
+                updateView()
+            }
+        }
+        function RemoveCool() {
+            if (coolmultiplier == false) {
+                coolbar.splice('■', 1)
+                coolness--;
+                coolbar.splice('■', 1)
+                coolness--;
+            } else if (coolmultiplier == true) {
+                coolbar.splice('■', 1)
+                coolness--;
+            }
+            updateView()
+        }
+
+
+        //Ting
+
+        function ItemEvent() {
+
+            let itemevent = Math.floor(Math.random() * 4);
+            if (itemevent == 0) {
+                Coolitem()
+            } else {
+                UnCoolItem()
+            }
+        }
+
+        function Coolitem() {
+            itemIsCool = true;
+            let citem = Math.floor(Math.random() * 4)
+            document.getElementById('EventDiv').innerHTML = /*html*/`
+           <br/>
+           <div class="text">På veien finner du:${CoolItems[citem]}<br></div>
+           <br/>
+           <button onclick = "PickUp()">Plukk opp?</button>
+
+`
+
+        }
+
+
+        function UnCoolItem() {
+            itemIsCool = false;
+            let citem = Math.floor(Math.random() * 4)
+            document.getElementById('EventDiv').innerHTML = /*html*/`
+            <br/>
+           <div class="text">På veien finner du:${UnCoolItems[citem]}<br></div>
+           <br/>
+           <button onclick = "PickUp()">Plukk opp?</button>
+`
+        }
+        function PickUp() {
+            if (itemIsCool == true) {
+                getCool()
+            } else {
+                RemoveCool()
+            }
+
+
+        }
+
+        //Bestemor
+
+        function kjørVidre() {
+            updateView();
+        }
+
+        function granny() {
+            app.innerHTML = /*html*/`
+          <div class = "coolbarContainer">
+                 <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+           </div>
+
+           <div class="buddyDiv">
+           <img src="karen.png" class="buddyImg">
+           </div>
+           
+           <div class="buddyBtn">
+           <button onclick="hitGranny()">Kjør på bestemor</button>
+           <button onclick="kjørVidre()">Kjør videre</button>
+           </div>
+           `;
+        }
+
+        function hitGranny() {
+            ActivateMulti()
+            app.innerHTML = /*html*/`
+            <div class = "coolbarContainer">
+
+<div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+</div>
+            <div class="buddyDiv">
+            <img src="dead.jpg" class="buddyImg"><br/>
+            </div>
+            
+           <div class="buddyDiv">
+           <div class = "text">
+           Jeg visste du var rette person for jobben, takk for at du kjørte over min bestemor.<br/> 
+           Nå fikk hun igjen for alle de gangene hu bakte boller uten noe godt inni.<br/> Mohaha!
+           </div>
+           </div>
+           
+           
+           <div class="buddyBtn">
+           <button onclick="kjørVidre()">Kjør videre</button>
+           </div>
+           
+           `;
+        }
+
+        function MeetFriend() {
+            let friend = Math.floor(Math.random() * 2);
+            if (friend == 1) {
+                Marius()
+            }
+            else {
+                Eskil()
+            }
+            console.log(friend)
+        }
+
+        //venner
+
+        function Marius() {
+            app.innerHTML = /*html*/ `
+            <div class = "coolbarContainer">
+                <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+                </div>
+
+                <div class="buddyDiv">
+                <img src="${kompis1.image}" class="buddyImg">
+                <div class="text">${kompis1.name} </div>
+                </div>
+
+                <div class="buddyBtn">
+                    <button onclick="button1()">Kul hilsen</button>
+                    </div>
+                    `;
+        }
+
+        function Eskil() {
+            app.innerHTML = /*html*/ `
+            <div class = "coolbarContainer">
+                <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+            </div>
+
+                <div class="buddyDiv">
+                     <img src="${kompis2.image}"class="buddyImg">
+                     <div class="text">${kompis2.name} </div>
+                </div>
+
+                <div class="buddyBtn">
+                    <button onclick="button1half()">Kul hilsen</button>
+                </div>
+                    `;
+        }
+
+        function button1() {
+            if (coolness <= 8) {
+                app.innerHTML =/*html*/ `<div class = "coolbarContainer">
+
+           <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+           </div>
+           <div class="buddyDiv">
+           <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+           </div>
+
+           <div class="buddyDiv">
+           <div class = "text">Marius sier: ${kompis1.greeting2}</div>
+           </div>
+
+                <div class="buddyBtn">
+                <button onclick="button2()">Prøv å smiske med en pilk</button>
+                <button onclick="button3()">Prøv å kjøre videre. Dette ble kleint gitt</button>
+                </div>
+                
+                
+                `;
+            }
+            else {
+                app.innerHTML =/*html*/ `
+                <div class = "coolbarContainer">
+                <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+                </div>
+                
+                <div class="buddyDiv">
+                <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+                </div>
+
+                 <div class="buddyDiv">
+                 <div class = "text">Marius sier: ${kompis1.greeting1}</div>
+                 </div>
+
+                 <div class="buddyBtn">
+                 <button onclick="button2()">Cowa bunga my dude!</button>
+                 <button onclick="button3()">Skjera bagera</button>
+                 </div>
+                 `;
+            }
+        }
+
+        function button1half() {
+            if (coolness <= 8) {
+                app.innerHTML = /*html*/`
+                <div class = "coolbarContainer">
+                <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+                </div>  
+
+                <div class="buddyDiv">
+                <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+                </div>
+
+                <div class="buddyDiv">
+                <div class = "text">Eskil sier: ${kompis2.greeting2}</div>
+                </div>
+
+                <div class="buddyBtn">
+                <button onclick="button2()">Begynn å bable om italianske tomater</button>
+                <button onclick="button3()">Nevn noe om trafikk og Larvik</button>
+                </div>
+
+                `;
+            }
+            else {
+                app.innerHTML =/*html*/ `<div class = "coolbarContainer">
+
+                <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+                </div>
+                
+                <div class="buddyDiv">
+                <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+                </div>
+
+                <div class="buddyDiv">
+                <div class = "text">Eskil sier: ${kompis2.greeting1}</div>
+                </div>
+
+                <div class="buddyBtn">
+                <button onclick="button2()">Locus within control, chief o7</button>
+                <button onclick="button3()">Locusts? Innsektene?</button>
+                </div>
+
+                `;
+            }
+        }
+
+        function button2() {
+            getCool();
+            app.innerHTML = /*html*/ `
+            <div class = "coolbarContainer">
+            <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+            </div>
+            
+            <div class="buddyDiv">
+            <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+            </div>
+
+            <div class="buddyDiv">
+            <div class = "text">Riktig svar! Kompisen sier seg enig og lar deg kjøre videre</div>
+            </div>
+
+            <div class="buddyBtn">
+            <button onclick="kjørVidre()">Kjør videre</button>
+            </div>
+             `;
+        }
+
+
+        function button3() {
+            RemoveCool();
+            app.innerHTML = /*html*/`
+            <div class = "coolbarContainer">
+            <div class = "text">Cool:</div><div class = "coolbar">${coolbar.join('')}</div>
+            </div>
+            
+            <div class="buddyDiv">
+            <div class = "text">${coolmultiplier ? "GRANNY MULTIPLIER ACTIVE!" : ""}</div>
+            </div>
+
+            <div class="buddyBtn">
+            <div class = "text">Feil svar! Kompisen ser misfornøyd ut. Prøv igjen?</div>
+            </div>
+
+            <div class="buddyBtn">
+            <button onclick="button2()">Gi en swagg sign med fingrene og beklag for din ukule oppførsel</button>
+            </div>
+
+             `;
+        }
+
+
+        function catsAllTheCats() {
+            let randomNum = Math.floor(Math.random() * 6);
+
+            // imgSrc = `cat${randomNum}.jpg`
+
+            if (randomNum == 1) {
+                imgSrc = "cat1.jpg"
+
+            }
+            else if (randomNum == 2) {
+                imgSrc = "cat2.jpg"
+
+            }
+            else if (randomNum == 3) {
+                imgSrc = "cat3.jpg"
+
+            }
+            else if (randomNum == 4) {
+                imgSrc = "cat4.jpg"
+
+            }
+            else if (randomNum == 5) {
+                imgSrc = "cat5.jpg"
+
+            }
+            else {
+                imgSrc = "cat6.jpg"
+
+            }
+
+            updateView()
+        }
+
+    </script>
+
+</body>
+
+</html>

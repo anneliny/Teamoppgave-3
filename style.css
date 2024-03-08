@@ -1,0 +1,111 @@
+.buddyDiv {
+    display: grid;
+    justify-content: center;
+    row-gap: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+}
+
+.buddyBtn {
+    display: grid;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+body {
+    margin: 10px;
+    background-color: rgb(32, 118, 68);
+}
+
+.buddyImg {
+    width: auto;
+    height: 300px;
+    border: solid rgb(0, 0, 0) 3px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.btns {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    margin-bottom: 22px;
+    margin-left: 20%;
+}
+
+.text {
+    font-size: larger;
+    margin: 10px;
+}
+
+.coolbar {
+    border: solid black 5px;
+    height: 20px;
+    width: 484px;
+    background-color: white;
+    color: rgb(198, 22, 48);
+    font-size: 40px;
+    line-height: 20px;
+    margin: 10px;
+    line-height: 12px;
+}
+
+.coolbarContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+.catImg {
+
+    width: auto;
+    height: 150px;
+    border: solid 2px;
+    border-radius: 10px;
+    position: absolute;
+    top: 65%;
+    left: 5%;
+}
+
+.catsBtn {
+    position: absolute;
+    top: 90%;
+    left: 10%;
+}
+
+button {
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    width: fit-content;
+}
+
+.events {
+    display: grid;
+    justify-content: center;
+}
+
+.winOrLoseContainer {
+    display: flex;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: x-large;
+    margin: 50px;
+}
+
+.winOrLoseImg {
+    width: 500px;
+    height: auto;
+    border: solid 2px;
+    border-radius: 10px;
+}
+
+.winOrLoseImgContainer {
+    display: flex;
+    justify-content: center;
+}
